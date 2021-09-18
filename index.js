@@ -1,8 +1,10 @@
 const express = require('express');
 const db = require('./models')
+const apiRouter = require('./routes/vehichles.js');
 
 const app = express();
 app.use(express.json());
+app.use('/api/vehichles', apiRouter);
 
 const PORT = process.env.PORT || 3000
 
