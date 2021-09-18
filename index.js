@@ -8,11 +8,17 @@ app.use('/api/vehichles', apiRouter);
 
 const PORT = process.env.PORT || 3000
 
-db.sequelize.sync()
-    .then((req) => {
-    app.listen(PORT, () => {
-        console.log(`Server running on port: ${PORT}`);
-    })})
-    .catch((err) => {
-        console.log(err)
-    }); 
+async function startServer() {
+    try {
+        await db.sequelize.sync()
+        console.log("Database connected");
+        app.listen(PORT, () => {
+            console.log(`Server running on port: ${PORT}`);
+        }); 
+    }
+    catch (err) {
+        console.error("Error: " + err);
+    }
+}
+
+startServer();
