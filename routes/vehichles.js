@@ -1,13 +1,14 @@
 const express = require('express');
+const { Vehichles }  = require('../models')
 const router = express.Router();
 
-router.get('/', (req, res) => {
-    res.json({test: 'test'});
-    // return contents of vehichles database in json
-})
+router.get('/', async (req, res) => {
+    // Obtain all rows of vehichles database
+    const vehichles = await Vehichles.findAll();
 
-router.get('/:id', (req, res) => {
-    res.send(req.params.id);
+    // Return the results as JSON
+    res.send(vehichles);
+    
 })
 
 module.exports = router;
